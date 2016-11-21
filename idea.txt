@@ -1,0 +1,5 @@
+Is there a way to check if an array is more sorted-ish or unsorted-ish in a reasonable amount of time?
+
+That is, is there a good way to guess if Insertion sort or Quicksort will work faster?
+
+In particular, can we gaurentee O(n log n) behavior instead of O(n**2) behavior?
