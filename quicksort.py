@@ -43,12 +43,6 @@ def quicksort(array, lo=0, hi=None):
         stack.append((split + 1, hi))
     return comparisons, swaps
 
-#def quicksort(a):
-#    comparisons = 1
-#    if len(a) < 2:
-#        return a
-#    quicksort(x for x in a[1:] if x <= a[0]) + [a[0]] + quicksort(x for x in a[1:] if x > a[0])
-
 
 # Insertion sort
 def insertion(array):
@@ -144,7 +138,7 @@ def plus(a, b):
 # Check if quicksort performs more quickly than
 # insertion sort for the given input
 def quicksortQuicker(l):
-    swapWeight = 1 # Assume swaps are 1 times more expensive
+    swapWeight = 10 # Assume swaps are 10 times more expensive
     a = l[:]
     b = l[:]
     comps, swaps = quicksort(a)
@@ -204,5 +198,7 @@ def factorial(i):
     return fold(mul, range(1, i+1))
 
 if __name__ == "__main__":
-    for i in xrange(1, 100):
-        print i, "-", accuracyScore(diverge, i)/float(factorial(i))
+    with open("quicksort-results", "w") as f:
+        for i in xrange(1,25):
+            f.write(str(i) + " - " + str(accuracyScore(diverge, i)/float(factorial(i))) + " - " + str(accuracyScore(rand, i)/float(factorial(i))) + "\n")
+            f.flush()
