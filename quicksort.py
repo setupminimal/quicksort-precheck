@@ -1,5 +1,5 @@
 
-from functools import partial
+import multiprocessing as multi
 
 # This partition function partitions in place,
 # is unstable, and requires O(n) time.
@@ -148,13 +148,8 @@ def quicksortQuicker(l):
 # Determine how many incorrect guesses f
 # makes when determining if quicksort will be faster
 def accuracyScore(f, n = 9):
-    score = 0
-    for l in permutes(range(n)):
-        p = f(l[:])
-        q = quicksortQuicker(l)
-        if p ^ q:
-            score += 1
-    return score
+    p=multi.Pool(processes=8)
+    return sum(p.map(lambda l: 1 if f(l[:]) ^ quicksortQuicker(l) else 0, permutes(range(n))))
 
 
 import time
